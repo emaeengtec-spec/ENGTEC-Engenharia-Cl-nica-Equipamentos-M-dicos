@@ -34,6 +34,8 @@ export default function Sobre() {
             calibrando e dando suporte a cada equipamento que passa por nós.
           </p>
 
+          <p className="sobre__slogan">Tecnologia que cuida, inovação que transforma.</p>
+
           <ul className="checklist">
             {diferenciais.map((d) => (
               <li key={d}>

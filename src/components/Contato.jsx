@@ -26,21 +26,21 @@ export default function Contato() {
           <ul className="contato__links">
             <li>
               <IconWhatsapp className="icon" />
-              <a href="https://wa.me/5500000000000" target="_blank" rel="noreferrer">
-                (00) 00000-0000
+              <a href="https://wa.me/5561994320037" target="_blank" rel="noreferrer">
+                (61) 99432-0037
               </a>
             </li>
             <li>
               <IconPhone className="icon" />
-              <a href="tel:+550000000000">(00) 00000-0000</a>
+              <a href="tel:+5561994320037">(61) 99432-0037</a>
             </li>
             <li>
               <IconMail className="icon" />
-              <a href="mailto:contato@engtec.com.br">contato@engtec.com.br</a>
+              <a href="mailto:emae.engtec@gmail.com">emae.engtec@gmail.com</a>
             </li>
             <li>
               <IconMapPin className="icon" />
-              <span>Rua Industrial, 1000 — Cidade/UF</span>
+              <span>Q 308 CJ 16 LT 21 S/N — Brasília, DF</span>
             </li>
           </ul>
         </div>

@@ -23,11 +23,19 @@ export default function Footer() {
 
         <div className="footer__contact">
           <h4>Contato</h4>
-          <a href="https://wa.me/5500000000000" target="_blank" rel="noreferrer">
-            <IconWhatsapp className="icon" /> WhatsApp
+          <a href="https://wa.me/5561994320037" target="_blank" rel="noreferrer">
+            <IconWhatsapp className="icon" /> (61) 99432-0037
           </a>
-          <a href="mailto:contato@engtec.com.br">contato@engtec.com.br</a>
-          <span>Cidade/UF — Brasil</span>
+          <a href="mailto:emae.engtec@gmail.com">emae.engtec@gmail.com</a>
+          <span>Q 308 CJ 16 LT 21 S/N — Brasília, DF</span>
+        </div>
+
+        <div className="footer__legal">
+          <h4>Empresa</h4>
+          <span>EMAE ENGTEC Manutenção e Acessórios e Equipamentos LTDA</span>
+          <span>CNPJ: 41.190.616/0001-50</span>
+          <span>Inscrição Municipal: 0804139400102</span>
+          <span>Optante Simples Nacional — ME/EPP</span>
         </div>
       </div>
 

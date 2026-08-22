@@ -26,11 +26,11 @@ export default function Hero() {
           </div>
 
           <div className="hero__contacts">
-            <a className="chip" href="https://wa.me/5500000000000" target="_blank" rel="noreferrer">
+            <a className="chip" href="https://wa.me/5561994320037" target="_blank" rel="noreferrer">
               <IconWhatsapp className="icon" /> WhatsApp
             </a>
-            <a className="chip" href="tel:+550000000000">
-              <IconPhone className="icon" /> (00) 00000-0000
+            <a className="chip" href="tel:+5561994320037">
+              <IconPhone className="icon" /> (61) 99432-0037
             </a>
           </div>
         </div>

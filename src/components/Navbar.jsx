@@ -37,7 +37,7 @@ export default function Navbar() {
           ))}
           <a
             className="btn btn--primary nav__cta"
-            href="https://wa.me/5500000000000"
+            href="https://wa.me/5561994320037"
             target="_blank"
             rel="noreferrer"
           >
