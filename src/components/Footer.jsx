@@ -19,10 +19,10 @@ export default function Footer() {
 
         <nav className="footer__nav">
           <h4>Navegação</h4>
-          <a href="#sobre">Sobre</a>
-          <a href="#equipamentos">Equipamentos</a>
-          <a href="#servicos">Serviços</a>
-          <a href="#faq">FAQ</a>
+          <Link to="/#sobre">Sobre</Link>
+          <Link to="/#equipamentos">Equipamentos</Link>
+          <Link to="/#servicos">Serviços</Link>
+          <Link to="/#faq">FAQ</Link>
         </nav>
 
         <div className="footer__contact">
