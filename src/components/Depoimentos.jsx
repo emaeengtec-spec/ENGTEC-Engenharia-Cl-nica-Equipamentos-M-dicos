@@ -1,3 +1,5 @@
+import useScrollReveal from '../hooks/useScrollReveal'
+
 const depoimentos = [
   {
     nome: 'Dra. Helena Castro',
@@ -23,32 +25,45 @@ const depoimentos = [
 ]
 
 export default function Depoimentos() {
+  const headRef = useScrollReveal()
+
   return (
     <section className="section depoimentos" id="depoimentos">
       <div className="container">
-        <div className="section__head">
+        <div className="section__head reveal" ref={headRef}>
           <span className="eyebrow">Depoimentos</span>
           <h2 className="section__title">Quem já comprou, confia</h2>
         </div>
 
         <div className="grid grid--3">
-          {depoimentos.map((d) => (
-            <article key={d.nome} className="card depoimento">
-              <div className="depoimento__stars" aria-label={`${d.estrelas} de 5`}>
-                {'★'.repeat(d.estrelas)}
-              </div>
-              <p className="depoimento__texto">“{d.texto}”</p>
-              <footer className="depoimento__autor">
-                <span className="depoimento__avatar">{d.nome.charAt(0)}</span>
-                <div>
-                  <strong>{d.nome}</strong>
-                  <span>{d.cargo}</span>
-                </div>
-              </footer>
-            </article>
+          {depoimentos.map((d, i) => (
+            <DepoCard key={d.nome} item={d} delay={i * 0.1} />
           ))}
         </div>
       </div>
     </section>
+  )
+}
+
+function DepoCard({ item, delay }) {
+  const ref = useScrollReveal()
+  return (
+    <article
+      className="card depoimento reveal-scale"
+      ref={ref}
+      style={{ transitionDelay: `${delay}s` }}
+    >
+      <div className="depoimento__stars" aria-label={`${item.estrelas} de 5`}>
+        {'★'.repeat(item.estrelas)}
+      </div>
+      <p className="depoimento__texto">"{item.texto}"</p>
+      <footer className="depoimento__autor">
+        <span className="depoimento__avatar">{item.nome.charAt(0)}</span>
+        <div>
+          <strong>{item.nome}</strong>
+          <span>{item.cargo}</span>
+        </div>
+      </footer>
+    </article>
   )
 }

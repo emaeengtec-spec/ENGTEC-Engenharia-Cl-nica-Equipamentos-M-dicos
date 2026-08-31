@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ENGTEC — Catálogo (pré-visualização para cliente)</title>
+  <style>
+    :root {
+      --navy: #0c1b33;
+      --navy-2: #122a4d;
+      --blue: #2563eb;
+      --accent: #f97316;
+      --ink: #1a2233;
+      --muted: #5b6478;
+      --line: #e6e9f0;
+      --bg: #f6f8fc;
+      --white: #ffffff;
+      --radius: 16px;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: 'Segoe UI', system-ui, -apple-system, Roboto, Arial, sans-serif; color: var(--ink); background: var(--bg); line-height: 1.5; }
+    .topbar { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 70%, #1a3a6b 100%); color: #fff; }
+    .topbar .wrap { max-width: 1140px; margin: 0 auto; padding: 18px 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+    .brand { display: flex; align-items: center; gap: 12px; }
+    .brand__mark { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 10px; background: #fff; color: var(--navy); font-weight: 800; }
+    .brand h1 { font-size: 1.3rem; margin: 0; }
+    .brand small { color: rgba(255,255,255,0.75); }
+    .topbar .slogan { font-style: italic; color: rgba(255,255,255,0.85); }
+    .container { max-width: 1140px; margin: 0 auto; padding: 40px 20px 60px; }
+    .hero { text-align: center; margin-bottom: 36px; }
+    .hero .eyebrow { display: inline-block; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--blue); background: #e8f0fe; padding: 6px 12px; border-radius: 999px; }
+    .hero h2 { font-size: clamp(1.6rem, 3.4vw, 2.4rem); margin: 14px 0 8px; }
+    .hero p { color: var(--muted); }
+    .toolbar { display: flex; gap: 10px; margin-bottom: 24px; flex-wrap: wrap; }
+    .toolbar input { flex: 1; min-width: 200px; padding: 11px 14px; border: 1px solid var(--line); border-radius: 12px; font-size: 0.95rem; }
+    .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+    .card { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; box-shadow: 0 8px 20px rgba(12,27,51,0.06); transition: transform .18s ease, box-shadow .18s ease; display: flex; flex-direction: column; }
+    .card:hover { transform: translateY(-4px); box-shadow: 0 18px 40px rgba(12,27,51,0.10); }
+    .card__img { width: 100%; aspect-ratio: 4/3; object-fit: cover; background: #eef1f7; border-bottom: 1px solid var(--line); }
+    .card__body { padding: 18px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
+    .cat-tag { align-self: flex-start; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); background: #fff1e6; padding: 4px 10px; border-radius: 999px; }
+    .card__nome { font-size: 1.05rem; font-weight: 800; }
+    .spec { font-size: 0.88rem; color: var(--muted); }
+    .spec b { color: var(--ink); font-weight: 700; }
+    .card__foot { margin-top: auto; padding-top: 12px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem; }
+    .disp { font-weight: 700; color: #15803d; }
+    .price { font-weight: 800; color: var(--navy); }
+    .note { background: #fff7ed; border: 1px solid #fed7aa; color: #9a3412; padding: 10px 14px; border-radius: 10px; font-size: 0.82rem; margin-bottom: 20px; }
+    @media (max-width: 900px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 600px) { .grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap">
+      <div class="brand">
+        <span class="brand__mark">EN</span>
+        <div>
+          <h1>ENGTEC</h1>
+          <small>EMAE ENGTEC — Manutenção, Acessórios e Equipamentos LTDA</small>
+        </div>
+      </div>
+      <div class="slogan">Tecnologia que cuida, inovação que transforma.</div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <span class="eyebrow">Catálogo de equipamentos</span>
+      <h2>Equipamentos médicos seminovos</h2>
+      <p>Com garantia, laudo de engenharia clínica e preço acessível.</p>
+    </section>
+
+    <div class="note">
+      Pré-visualização local e independente — <strong>não está integrada ao site</strong>.
+      Modelo e especificações são extraídos automaticamente dos nomes dos arquivos.
+    </div>
+
+    <div class="toolbar">
+      <input type="search" id="busca" placeholder="Buscar equipamento, marca ou modelo..." />
+    </div>
+
+    <div class="grid" id="grid"></div>
+  </main>
+
+  <script>
+    // Lista de imagens (caminho relativo à pasta do catálogo)
+    const arquivos = [
+      'BOMBA FRESENIUS TIVA AGILIA.jpeg',
+      'BOMBA SERINGA CONTEC SP950.jpeg',
+      'CARDIOVERSOR CARDIOMAX SÉRIE 8.jpeg',
+      'CARDIOVERSOR CARDIOMAX SÉRIE 8_2.jpeg',
+      'CARDIOVERSOR LIFEPAK 12.jpeg',
+      'CARDIOVERSOR MINDRAY D30 - COMPLETO.jpeg',
+      'DEA CMOS DRAKE LIFE 400 FUTURA.jpeg',
+      'DEA CMOS DRAKE LIFE 400 FUTURA_bolsapreta.jpeg',
+      'DEA CMOS DRAKE LIFE 400 FUTURA_sembolsa.jpeg',
+      'MONITOR DE TRANSPORTE GE DASH 3000.jpeg',
+      'MONITOR DE TRANSPORTE MINDRAY PM-8000 EXPRESS.jpeg',
+      'MONITOR DIXTAL DX 2022 COM CAPINOGRAFIA.jpeg',
+      'MONITOR DIXTAL DX2023.jpeg',
+      'MONITOR PROLIFE P12.jpeg',
+      'NEBULIZADOR G-TECH COMPACT DC1.jpeg',
+      'NEBULIZADOR OMRON COMP AIR NE-C28.jpeg',
+      'NEBULIZADOR ROSSMAX COMPACTO NB60.jpeg',
+      'NEBULIZADOR ROSSMAX SUPER MINI DOG.jpeg',
+      'OXIMETROS DE PULSO PALM.jpeg',
+      'VAPORIZADOR CALIBRADO HB DE SEVOFLURANE.jpeg',
+      'VAPORIZADOR CALIBRADO MINDRAY V60 DE ISOFLURANE.jpeg',
+      'VAPORIZADO_novitech.jpeg',
+      'VENTILADOR DE TRANSPORTE DRAGER OXYLOG 3000 PLUS.jpeg',
+      'VENTILADOR DE TRANSPORTE MICROTAK TOTAL ANO 2021.jpeg',
+    ];
+
+    // Extrai categoria, marca/modelo e especificações a partir do nome do arquivo
+    function parseNome(nomeArquivo) {
+      const base = nomeArquivo.replace(/\.jpeg$/i, '').replace(/_/g, ' ').trim();
+      const u = base.toUpperCase();
+
+      const categorias = [
+        ['BOMBA SERINGA', 'Bomba de seringa'],
+        ['BOMBA', 'Bomba de infusão'],
+        ['CARDIOVERSOR', 'Cardioversor'],
+        ['DEA', 'DEA'],
+        ['MONITOR DE TRANSPORTE', 'Monitor de transporte'],
+        ['MONITOR', 'Monitor'],
+        ['NEBULIZADOR', 'Nebulizador'],
+        ['OXIMETROS', 'Oximetro de pulso'],
+        ['VAPORIZADOR', 'Vaporizador'],
+        ['VAPORIZADO', 'Vaporizador'],
+        ['VENTILADOR DE TRANSPORTE', 'Ventilador de transporte'],
+        ['VENTILADOR', 'Ventilador'],
+      ];
+      let categoria = 'Equipamento';
+      for (const [k, v] of categorias) {
+        if (u.startsWith(k)) { categoria = v; break; }
+      }
+
+      // Especificações conhecidas
+      const especMap = [
+        ['COMPLETO', 'Conjunto completo'],
+        ['COM CAPINOGRAFIA', 'Com capnografia'],
+        ['SÉRIE 8', 'Série 8'],
+        ['ANO 2021', 'Ano 2021'],
+        ['DE SEVOFLURANE', 'Para sevoflurano'],
+        ['DE ISOFLURANE', 'Para isoflurano'],
+        ['BOLSAPRETA', 'Com bolsa preta'],
+        ['SEMBOLSA', 'Sem bolsa'],
+      ];
+      const especificacoes = [];
+      for (const [k, v] of especMap) {
+        if (u.includes(k)) especificacoes.push(v);
+      }
+
+      // Modelo = restante após remover categoria e palavras de especificação
+      let resto = base;
+      for (const [k] of categorias) {
+        if (u.startsWith(k)) { resto = base.slice(k.length).trim(); break; }
+      }
+      resto = resto
+        .replace(/COMPLETO|- COMPLETO|COM CAPINOGRAFIA|SÉRIE 8|SÉRIE 8 2|ANO 2021|DE SEVOFLURANE|DE ISOFLURANE|BOLSAPRETA|SEMBOLSA/gi, ' ')
+        .replace(/\b(CALIBRADO|DE PULSO|DE)\b/gi, ' ')
+        .replace(/\s{2,}/g, ' ')
+        .replace(/ 2$/i, ' (2)')
+        .replace(/\s+$/g, '')
+        .replace(/^\s+/g, '')
+        .trim();
+
+      return { categoria, modelo: resto || '—', especificacoes };
+    }
+
+    const itens = arquivos.map(f => {
+      const { categoria, modelo, especificacoes } = parseNome(f);
+      return {
+        imagem: 'catalogo-imagens/' + f,
+        nome: f.replace(/\.jpeg$/i, '').replace(/_/g, ' '),
+        categoria, modelo, especificacoes,
+        disp: 'Disponível',
+        preco: 'Sob consulta',
+      };
+    });
+
+    function cardHtml(it) {
+      const espec = it.especificacoes.length ? it.especificacoes.join(' · ') : '—';
+      return `
+        <article class="card">
+          <img class="card__img" src="${it.imagem}" alt="${it.nome}" onerror="this.style.background='#eef1f7'">
+          <div class="card__body">
+            <span class="cat-tag">${it.categoria}</span>
+            <div class="card__nome">${it.nome}</div>
+            <div class="spec"><b>Modelo:</b> ${it.modelo}</div>
+            <div class="spec"><b>Especificações:</b> ${espec}</div>
+            <div class="card__foot">
+              <span class="disp">${it.disp}</span>
+              <span class="price">${it.preco}</span>
+            </div>
+          </div>
+        </article>`;
+    }
+
+    function render() {
+      const f = document.getElementById('busca').value.toLowerCase();
+      const grid = document.getElementById('grid');
+      grid.innerHTML = itens
+        .filter(it => !f || `${it.nome} ${it.modelo} ${it.categoria}`.toLowerCase().includes(f))
+        .map(cardHtml)
+        .join('');
+    }
+
+    document.getElementById('busca').addEventListener('input', render);
+    render();
+  </script>
+</body>
+</html>

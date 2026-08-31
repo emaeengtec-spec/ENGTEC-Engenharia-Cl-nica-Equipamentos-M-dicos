@@ -1,9 +1,12 @@
 import { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import { IconMenu, IconClose, IconWhatsapp } from './Icons'
 
 const links = [
   { href: '#sobre', label: 'Sobre' },
   { href: '#equipamentos', label: 'Equipamentos' },
+  { to: '/catalogo', label: 'Catálogo' },
+  { to: '/admin', label: 'Admin', admin: true },
   { href: '#servicos', label: 'Serviços' },
   { href: '#depoimentos', label: 'Depoimentos' },
   { href: '#faq', label: 'FAQ' },
@@ -13,6 +16,9 @@ const links = [
 export default function Navbar() {
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const isAdmin =
+    typeof window !== 'undefined' &&
+    sessionStorage.getItem('engtec_admin_auth') === '1'
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20)
@@ -24,17 +30,28 @@ export default function Navbar() {
   return (
     <header className={`navbar ${scrolled ? 'navbar--scrolled' : ''}`}>
       <div className="container navbar__inner">
-        <a href="#top" className="brand" aria-label="ENGTEC">
-          <span className="brand__mark">EN</span>
-          <span className="brand__text">ENGTEC</span>
-        </a>
+        <Link to="/" className="brand brand--text" aria-label="EMAE ENGTEC" onClick={() => setOpen(false)}>
+          <span className="brand__name">EMAE <strong>ENGTEC</strong></span>
+        </Link>
 
         <nav className={`nav ${open ? 'nav--open' : ''}`}>
-          {links.map((l) => (
-            <a key={l.href} href={l.href} onClick={() => setOpen(false)}>
-              {l.label}
-            </a>
-          ))}
+          {links
+            .filter((l) => !l.admin || isAdmin)
+            .map((l) =>
+              l.to ? (
+                <Link key={l.to} to={l.to} onClick={() => setOpen(false)}>
+                  {l.label}
+                </Link>
+              ) : (
+                <Link
+                  key={l.href}
+                  to={'/' + l.href}
+                  onClick={() => setOpen(false)}
+                >
+                  {l.label}
+                </Link>
+              )
+            )}
           <a
             className="btn btn--primary nav__cta"
             href="https://wa.me/5561994320037"

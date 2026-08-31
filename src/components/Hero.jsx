@@ -1,11 +1,24 @@
 import { IconBolt, IconShield, IconTruck, IconWhatsapp, IconPhone } from './Icons'
+import HeroParticles from './HeroParticles'
 
 export default function Hero() {
   return (
     <section className="hero" id="top">
+      <HeroParticles />
       <div className="hero__bg" aria-hidden="true" />
       <div className="container hero__inner">
         <div className="hero__content">
+          <div className="hero__logo-wrap" aria-hidden="true">
+            <div className="hero__logo-ring hero__logo-ring--1" />
+            <div className="hero__logo-ring hero__logo-ring--2" />
+            <div className="hero__logo-ring hero__logo-ring--3" />
+            <img
+              className="hero__logo-img"
+              src="/logo.jpg"
+              alt="EMAE ENGTEC logo"
+              draggable="false"
+            />
+          </div>
           <span className="badge">Equipamentos médicos seminovos + Engenharia clínica</span>
           <h1 className="hero__title">
             Tecnologia médica que <span className="accent">custa menos</span> e salva vidas

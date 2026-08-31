@@ -1,13 +1,82 @@
 <!doctype html>
-<html lang="en">
+<html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" href="/logo.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>langpage</title>
+    <title>EMAE ENGTEC — Engenharia Clínica e Equipamentos Médicos</title>
+    <meta name="description" content="EMAE ENGTEC — Manutenção, acessórios e equipamentos médicos seminovos com garantia e laudo de engenharia clínica. São Paulo, DF." />
+    <meta name="keywords" content="equipamentos médicos, engenharia clínica, manutenção hospitalar, bomba de infusão, monitor multiparamétrico, cardioversor, DEA, nebulizador, ventilador, EMAE ENGTEC" />
+    <meta name="author" content="EMAE ENGTEC" />
+    <meta name="robots" content="index, follow" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="EMAE ENGTEC — Engenharia Clínica e Equipamentos Médicos" />
+    <meta property="og:description" content="Equipamentos médicos seminovos com garantia, laudo de engenharia clínica e preço acessível." />
+    <meta property="og:image" content="/logo.png" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta name="theme-color" content="#0a0e1a" />
+
+    <style>
+      .preloader {
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+        background: #0a0e1a;
+        transition: opacity 0.5s ease, visibility 0.5s ease;
+      }
+      .preloader--hide {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+      }
+      .preloader__logo {
+        width: 140px;
+        height: auto;
+        animation: preloaderPulse 1.2s ease-in-out infinite;
+      }
+      .preloader__bar {
+        width: 120px;
+        height: 3px;
+        background: rgba(255,255,255,0.12);
+        border-radius: 4px;
+        overflow: hidden;
+      }
+      .preloader__fill {
+        height: 100%;
+        width: 40%;
+        background: linear-gradient(90deg, #06b6d4, #0891b2);
+        border-radius: 4px;
+        animation: preloaderSlide 1s ease-in-out infinite;
+      }
+      @keyframes preloaderPulse {
+        0%, 100% { transform: scale(1); opacity: 1; }
+        50% { transform: scale(1.05); opacity: 0.8; }
+      }
+      @keyframes preloaderSlide {
+        0% { transform: translateX(-100%); }
+        100% { transform: translateX(350%); }
+      }
+    </style>
   </head>
   <body>
+    <div class="preloader" id="preloader">
+      <img class="preloader__logo" src="/logo.png" alt="EMAE ENGTEC" />
+      <div class="preloader__bar"><div class="preloader__fill"></div></div>
+    </div>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
+    <script>
+      window.addEventListener('load', function() {
+        setTimeout(function() {
+          var p = document.getElementById('preloader');
+          if (p) { p.classList.add('preloader--hide'); setTimeout(function(){ p.remove(); }, 600); }
+        }, 600);
+      });
+    </script>
   </body>
 </html>

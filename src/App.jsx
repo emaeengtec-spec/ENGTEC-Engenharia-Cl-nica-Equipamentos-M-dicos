@@ -7,6 +7,7 @@ import Depoimentos from './components/Depoimentos'
 import Faq from './components/Faq'
 import Contato from './components/Contato'
 import Footer from './components/Footer'
+import BackToTop from './components/BackToTop'
 
 export default function App() {
   return (
@@ -22,6 +23,7 @@ export default function App() {
         <Contato />
       </main>
       <Footer />
+      <BackToTop />
     </>
   )
 }

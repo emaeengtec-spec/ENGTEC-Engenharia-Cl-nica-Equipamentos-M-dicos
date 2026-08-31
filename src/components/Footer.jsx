@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { IconWhatsapp } from './Icons'
 
 export default function Footer() {
@@ -6,10 +7,13 @@ export default function Footer() {
     <footer className="footer">
       <div className="container footer__inner">
         <div className="footer__brand">
-          <a href="#top" className="brand">
-            <span className="brand__mark">EN</span>
-            <span className="brand__text">ENGTEC</span>
-          </a>
+          <Link to="/" className="brand">
+            <div className="footer__logo-container">
+              <div className="footer__logo-glow" />
+              <img className="footer__logo-full" src="/logo.jpg" alt="EMAE ENGTEC — Manutenção, Acessórios e Equipamentos LTDA" />
+            </div>
+          </Link>
+          <p className="footer__empresa">EMAE ENGTEC — Manutenção, Acessórios e Equipamentos LTDA</p>
           <p>Equipamentos médicos seminovos e engenharia clínica com garantia e laudo.</p>
         </div>
 

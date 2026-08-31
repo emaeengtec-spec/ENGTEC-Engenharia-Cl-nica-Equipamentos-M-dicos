@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Catálogo ENGTEC — Equipamentos e Peças</title>
+  <style>
+    :root {
+      --navy: #0c1b33;
+      --navy-2: #122a4d;
+      --blue: #2563eb;
+      --accent: #f97316;
+      --ink: #1a2233;
+      --muted: #5b6478;
+      --line: #e6e9f0;
+      --bg: #f6f8fc;
+      --white: #ffffff;
+      --radius: 14px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', system-ui, -apple-system, Roboto, Arial, sans-serif;
+      color: var(--ink);
+      background: var(--bg);
+      line-height: 1.5;
+    }
+    .topbar {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 70%, #1a3a6b 100%);
+      color: #fff;
+      padding: 28px 20px;
+    }
+    .topbar .wrap {
+      max-width: 1200px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+    }
+    .brand { display: flex; align-items: center; gap: 12px; }
+    .brand__mark {
+      display: grid; place-items: center;
+      width: 42px; height: 42px; border-radius: 10px;
+      background: #fff; color: var(--navy); font-weight: 800;
+    }
+    .brand h1 { font-size: 1.4rem; margin: 0; }
+    .brand small { color: rgba(255,255,255,0.75); }
+    .topbar .slogan { font-style: italic; color: rgba(255,255,255,0.85); }
+    .container { max-width: 1200px; margin: 0 auto; padding: 28px 20px 60px; }
+    .toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin: 8px 0 18px; }
+    .toolbar input[type="search"] {
+      flex: 1; min-width: 200px; padding: 10px 12px;
+      border: 1px solid var(--line); border-radius: 10px; font-size: 0.95rem;
+    }
+    button { font-family: inherit; font-weight: 700; cursor: pointer; border: none; border-radius: 10px; padding: 10px 16px; font-size: 0.92rem; }
+    .btn-primary { background: var(--accent); color: #fff; }
+    .btn-ghost { background: #fff; color: var(--navy); border: 1px solid var(--line); }
+    .btn-danger { background: #fff; color: #c0392b; border: 1px solid #f0c5c0; padding: 6px 10px; }
+    h2.cat-title { font-size: 1.25rem; margin: 30px 0 12px; color: var(--navy); }
+    .table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: var(--radius); background: #fff; }
+    table { border-collapse: collapse; width: 100%; min-width: 980px; }
+    th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); font-size: 0.9rem; vertical-align: middle; }
+    th { background: #f0f3f9; color: var(--navy); font-weight: 700; white-space: nowrap; }
+    tr:last-child td { border-bottom: none; }
+    td input, td select, td textarea {
+      width: 100%; border: 1px solid transparent; background: transparent;
+      font-family: inherit; font-size: 0.9rem; padding: 5px 6px; border-radius: 6px; color: var(--ink);
+    }
+    td textarea { resize: vertical; min-height: 46px; }
+    td input:focus, td select:focus, td textarea:focus { outline: none; border-color: var(--blue); background: #fff; }
+    .img-cell { width: 92px; text-align: center; }
+    .thumb { width: 64px; height: 64px; object-fit: cover; border-radius: 8px; border: 1px solid var(--line); display: block; margin: 0 auto 4px; background: #f0f3f9; }
+    .img-up { font-size: 0.72rem; width: 100%; }
+    .note { background: #fff7ed; border: 1px solid #fed7aa; color: #9a3412; padding: 10px 14px; border-radius: 10px; font-size: 0.85rem; margin-bottom: 16px; }
+    .hint { color: var(--muted); font-size: 0.85rem; margin-top: 6px; }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap">
+      <div class="brand">
+        <span class="brand__mark">EN</span>
+        <div>
+          <h1>ENGTEC</h1>
+          <small>EMAE ENGTEC — Manutenção, Acessórios e Equipamentos LTDA</small>
+        </div>
+      </div>
+      <div class="slogan">Tecnologia que cuida, inovação que transforma.</div>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="note">
+      Catálogo interno e independente — <strong>não faz parte do site</strong>. Edite as células,
+      envie imagens, adicione ou remova linhas. Os dados (incluindo imagens) ficam salvos neste
+      navegador (localStorage). Use “Exportar CSV” para gerar o catálogo em planilha.
+    </div>
+
+    <div class="toolbar">
+      <input type="search" id="busca" placeholder="Buscar por nome, modelo, código ou informação..." />
+      <button class="btn-ghost" id="exportBtn">Exportar CSV</button>
+      <button class="btn-ghost" id="resetBtn">Restaurar exemplo</button>
+    </div>
+
+    <h2 class="cat-title">Equipamentos disponíveis</h2>
+    <div class="table-wrap">
+      <table id="tabela-equip">
+        <thead>
+          <tr>
+            <th>Imagem</th>
+            <th>Nome</th>
+            <th>Modelo</th>
+            <th>Código / Peça</th>
+            <th>Estado</th>
+            <th>Disponibilidade</th>
+            <th>Preço (R$)</th>
+            <th>Informações</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <button class="btn-primary" data-add="equip">+ Adicionar equipamento</button>
+
+    <h2 class="cat-title">Peças</h2>
+    <div class="table-wrap">
+      <table id="tabela-pecas">
+        <thead>
+          <tr>
+            <th>Imagem</th>
+            <th>Nome da peça</th>
+            <th>Aplicação (equipamento)</th>
+            <th>Modelo</th>
+            <th>Código / Peça</th>
+            <th>Estado</th>
+            <th>Preço (R$)</th>
+            <th>Informações</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <button class="btn-primary" data-add="pecas">+ Adicionar peça</button>
+
+    <p class="hint">Dica: para compartilhar com a equipe, exporte em CSV ou envie este arquivo HTML.</p>
+  </main>
+
+  <script>
+    const ESTADOS = ['Seminovo', 'Novo', 'Usado', 'Em manutenção'];
+    const DISP = ['Disponível', 'Sob consulta', 'Reservado', 'Esgotado'];
+
+    const exemplo = {
+      equip: [
+        { imagem:'catalogo-imagens/BOMBA FRESENIUS TIVA AGILIA.jpeg', nome:'BOMBA FRESENIUS TIVA AGILIA', modelo:'', peca:'', estado:'Seminovo', disp:'Disponível', preco:'', info:'' },
+        { imagem:'catalogo-imagens/BOMBA SERINGA CONTEC SP950.jpeg', nome:'BOMBA SERINGA CONTEC SP950', modelo:'', peca:'', estado:'Seminovo', disp:'Disponível', preco:'', info:'' },
+        { imagem:'catalogo-imagens/CARDIOVERSOR CARDIOMAX SÉRIE 8.jpeg', nome:'CARDIOVERSOR CARDIOMAX SÉRIE 8', modelo:'', peca:'', estado:'Seminovo', disp:'Disponível', preco:'', info:'' },
+        { imagem:'catalogo-imagens/CARDIOVERSOR CARDIOMAX SÉRIE 8_2.jpeg', nome:'CARDIOVERSOR CARDIOMAX SÉRIE 8 2', modelo:'', peca:'', estado:'Seminovo', disp:'Disponível', preco:'', info:'' },
+        { imagem:'catalogo-imagens/CARDIOVERSOR LIFEPAK 12.jpeg', nome:'CARDIOVERSOR LIFEPAK 12', modelo:'', peca:'', estado:'Seminovo', disp:'Disponível', preco:'', info:'' },
+        { imagem:'catalogo-imagens/CARDIOVERSOR MINDRAY D30 - COMPLETO.jpeg', nome:'CARDIOVERSOR MINDRAY D30 - COMPLETO', modelo:'', peca:'', estado:'Seminovo', disp:'Disponível', preco:'', info:'' },
+        { imagem:'catalogo-imagens/DEA CMOS DRAKE LIFE 400 FUTURA.jpeg', nome:'DEA CMOS DRAKE LIFE 400 FUTURA', modelo:'', peca:'', estado:'Seminovo', disp:'Disponível', preco:'', info:'' },
+        { imagem:'catalogo-imagens/DEA CMOS DRAKE LIFE 400 FUTURA_bolsapreta.jpeg', nome:'DEA CMOS DRAKE LIFE 400 FUTURA bolsapreta', modelo:'', peca:'', estado:'Seminovo', disp:'Disponível', preco:'', info:'' },
+        { imagem:'catalogo-imagens/DEA CMOS DRAKE LIFE 400 FUTURA_sembolsa.jpeg', nome:'DEA CMOS DRAKE LIFE 400 FUTURA sembolsa', modelo:'', peca:'', estado:'Seminovo', disp:'Disponível', preco:'', info:'' },
+        { imagem:'catalogo-imagens/MONITOR DE TRANSPORTE GE DASH 3000.jpeg', nome:'MONITOR DE TRANSPORTE GE DASH 3000', modelo:'', peca:'', estado:'Seminovo', disp:'Disponível', preco:'', info:'' },
+        { imagem:'catalogo-imagens/MONITOR DE TRANSPORTE MINDRAY PM-8000 EXPRESS.jpeg', nome:'MONITOR DE TRANSPORTE MINDRAY PM-8000 EXPRESS', modelo:'', peca:'', estado:'Seminovo', disp:'Disponível', preco:'', info:'' },
+        { imagem:'catalogo-imagens/MONITOR DIXTAL DX 2022 COM CAPINOGRAFIA.jpeg', nome:'MONITOR DIXTAL DX 2022 COM CAPINOGRAFIA', modelo:'', peca:'', estado:'Seminovo', disp:'Disponível', preco:'', info:'' },
+        { imagem:'catalogo-imagens/MONITOR DIXTAL DX2023.jpeg', nome:'MONITOR DIXTAL DX2023', modelo:'', peca:'', estado:'Seminovo', disp:'Disponível', preco:'', info:'' },
+        { imagem:'catalogo-imagens/MONITOR PROLIFE P12.jpeg', nome:'MONITOR PROLIFE P12', modelo:'', peca:'', estado:'Seminovo', disp:'Disponível', preco:'', info:'' },
+        { imagem:'catalogo-imagens/NEBULIZADOR G-TECH COMPACT DC1.jpeg', nome:'NEBULIZADOR G-TECH COMPACT DC1', modelo:'', peca:'', estado:'Seminovo', disp:'Disponível', preco:'', info:'' },
+        { imagem:'catalogo-imagens/NEBULIZADOR OMRON COMP AIR NE-C28.jpeg', nome:'NEBULIZADOR OMRON COMP AIR NE-C28', modelo:'', peca:'', estado:'Seminovo', disp:'Disponível', preco:'', info:'' },
+        { imagem:'catalogo-imagens/NEBULIZADOR ROSSMAX COMPACTO NB60.jpeg', nome:'NEBULIZADOR ROSSMAX COMPACTO NB60', modelo:'', peca:'', estado:'Seminovo', disp:'Disponível', preco:'', info:'' },
+        { imagem:'catalogo-imagens/NEBULIZADOR ROSSMAX SUPER MINI DOG.jpeg', nome:'NEBULIZADOR ROSSMAX SUPER MINI DOG', modelo:'', peca:'', estado:'Seminovo', disp:'Disponível', preco:'', info:'' },
+        { imagem:'catalogo-imagens/OXIMETROS DE PULSO PALM.jpeg', nome:'OXIMETROS DE PULSO PALM', modelo:'', peca:'', estado:'Seminovo', disp:'Disponível', preco:'', info:'' },
+        { imagem:'catalogo-imagens/VAPORIZADOR CALIBRADO HB DE SEVOFLURANE.jpeg', nome:'VAPORIZADOR CALIBRADO HB DE SEVOFLURANE', modelo:'', peca:'', estado:'Seminovo', disp:'Disponível', preco:'', info:'' },
+        { imagem:'catalogo-imagens/VAPORIZADOR CALIBRADO MINDRAY V60 DE ISOFLURANE.jpeg', nome:'VAPORIZADOR CALIBRADO MINDRAY V60 DE ISOFLURANE', modelo:'', peca:'', estado:'Seminovo', disp:'Disponível', preco:'', info:'' },
+        { imagem:'catalogo-imagens/VAPORIZADO_novitech.jpeg', nome:'VAPORIZADO novitech', modelo:'', peca:'', estado:'Seminovo', disp:'Disponível', preco:'', info:'' },
+        { imagem:'catalogo-imagens/VENTILADOR DE TRANSPORTE DRAGER OXYLOG 3000 PLUS.jpeg', nome:'VENTILADOR DE TRANSPORTE DRAGER OXYLOG 3000 PLUS', modelo:'', peca:'', estado:'Seminovo', disp:'Disponível', preco:'', info:'' },
+        { imagem:'catalogo-imagens/VENTILADOR DE TRANSPORTE MICROTAK TOTAL ANO 2021.jpeg', nome:'VENTILADOR DE TRANSPORTE MICROTAK TOTAL ANO 2021', modelo:'', peca:'', estado:'Seminovo', disp:'Disponível', preco:'', info:'' },
+      ],
+      pecas: [
+        { imagem:'', nome:'Placa controladora de ventilador', apl:'Ventilador pulmonar', modelo:'', peca:'', estado:'Novo', preco:'', info:'' },
+        { imagem:'', nome:'Sensor de SpO₂', apl:'Monitor multiparamétrico', modelo:'', peca:'', estado:'Novo', preco:'', info:'Compatível.' },
+        { imagem:'', nome:'Bomba peristáltica', apl:'Bomba de infusão', modelo:'', peca:'', estado:'Seminovo', preco:'', info:'' },
+        { imagem:'', nome:'Lâmpada LED de foco', apl:'Foco cirúrgico', modelo:'', peca:'', estado:'Novo', preco:'', info:'' },
+        { imagem:'', nome:'Pedal de bisturi', apl:'Bisturi', modelo:'', peca:'', estado:'Seminovo', preco:'', info:'' },
+        { imagem:'', nome:'Bateria para monitor', apl:'Monitor multiparamétrico', modelo:'', peca:'', estado:'Novo', preco:'', info:'' },
+      ],
+    };
+
+    const KEY = 'engtec_catalogo_v2';
+    let dados = carregar();
+
+    function carregar() {
+      try { const s = localStorage.getItem(KEY); if (s) return JSON.parse(s); } catch (e) {}
+      return JSON.parse(JSON.stringify(exemplo));
+    }
+    function salvar() {
+      try { localStorage.setItem(KEY, JSON.stringify(dados)); }
+      catch (e) { alert('Não foi possível salvar (talvez a imagem seja muito grande para o navegador).'); }
+    }
+
+    function opt(list, val) { return list.map(e => `<option ${e===val?'selected':''}>${e}</option>`).join(''); }
+
+    function imgCell(item) {
+      const td = document.createElement('td');
+      td.className = 'img-cell';
+      const img = document.createElement('img');
+      img.className = 'thumb';
+      if (item.imagem) img.src = item.imagem; else img.style.display = 'none';
+      const up = document.createElement('input');
+      up.type = 'file'; up.accept = 'image/*'; up.className = 'img-up';
+      up.addEventListener('change', e => {
+        const f = e.target.files[0]; if (!f) return;
+        const r = new FileReader();
+        r.onload = () => { item.imagem = r.result; img.src = r.result; img.style.display = 'block'; salvar(); };
+        r.readAsDataURL(f);
+      });
+      td.appendChild(img); td.appendChild(up);
+      return td;
+    }
+
+    function cell(item, k, tag) {
+      const td = document.createElement('td');
+      const el = document.createElement(tag);
+      el.value = item[k] || '';
+      el.addEventListener('input', () => { item[k] = el.value; salvar(); });
+      td.appendChild(el);
+      return td;
+    }
+
+    function selectCell(item, k, list) {
+      const td = document.createElement('td');
+      const el = document.createElement('select');
+      el.innerHTML = opt(list, item[k]);
+      el.addEventListener('change', () => { item[k] = el.value; salvar(); });
+      td.appendChild(el);
+      return td;
+    }
+
+    function removeBtn(tipo, i) {
+      const td = document.createElement('td');
+      const b = document.createElement('button');
+      b.className = 'btn-danger'; b.textContent = 'Remover';
+      b.addEventListener('click', () => { dados[tipo].splice(i, 1); salvar(); render(); });
+      td.appendChild(b);
+      return td;
+    }
+
+    function linhaEquip(it, i) {
+      const tr = document.createElement('tr');
+      tr.appendChild(imgCell(it));
+      tr.appendChild(cell(it, 'nome', 'input'));
+      tr.appendChild(cell(it, 'modelo', 'input'));
+      tr.appendChild(cell(it, 'peca', 'input'));
+      tr.appendChild(selectCell(it, 'estado', ESTADOS));
+      tr.appendChild(selectCell(it, 'disp', DISP));
+      tr.appendChild(cell(it, 'preco', 'input'));
+      tr.appendChild(cell(it, 'info', 'textarea'));
+      tr.appendChild(removeBtn('equip', i));
+      return tr;
+    }
+
+    function linhaPeca(it, i) {
+      const tr = document.createElement('tr');
+      tr.appendChild(imgCell(it));
+      tr.appendChild(cell(it, 'nome', 'input'));
+      tr.appendChild(cell(it, 'apl', 'input'));
+      tr.appendChild(cell(it, 'modelo', 'input'));
+      tr.appendChild(cell(it, 'peca', 'input'));
+      tr.appendChild(selectCell(it, 'estado', ESTADOS));
+      tr.appendChild(cell(it, 'preco', 'input'));
+      tr.appendChild(cell(it, 'info', 'textarea'));
+      tr.appendChild(removeBtn('pecas', i));
+      return tr;
+    }
+
+    function render() {
+      const tbE = document.querySelector('#tabela-equip tbody');
+      const tbP = document.querySelector('#tabela-pecas tbody');
+      tbE.innerHTML = ''; tbP.innerHTML = '';
+      const f = document.getElementById('busca').value.toLowerCase();
+      const ok = (it) => !f || `${it.nome} ${it.modelo} ${it.peca} ${it.info} ${it.apl||''}`.toLowerCase().includes(f);
+      dados.equip.forEach((it, i) => { if (ok(it)) tbE.appendChild(linhaEquip(it, i)); });
+      dados.pecas.forEach((it, i) => { if (ok(it)) tbP.appendChild(linhaPeca(it, i)); });
+    }
+
+    document.querySelectorAll('[data-add]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const t = btn.getAttribute('data-add');
+        if (t === 'equip') dados.equip.push({ imagem:'', nome:'', modelo:'', peca:'', estado:'Seminovo', disp:'Disponível', preco:'', info:'' });
+        else dados.pecas.push({ imagem:'', nome:'', apl:'', modelo:'', peca:'', estado:'Novo', preco:'', info:'' });
+        salvar(); render();
+      });
+    });
+
+    document.getElementById('busca').addEventListener('input', render);
+    document.getElementById('resetBtn').addEventListener('click', () => {
+      if (confirm('Restaurar o catálogo de exemplo? Isso apaga suas edições locais.')) {
+        dados = JSON.parse(JSON.stringify(exemplo)); salvar(); render();
+      }
+    });
+    document.getElementById('exportBtn').addEventListener('click', () => {
+      const esc = v => `"${String(v || '').replace(/"/g, '""')}"`;
+      const head = ['Tipo','Imagem','Nome','Modelo','Código/Peça','Aplicação','Estado','Disponibilidade','Preço (R$)','Informações'];
+      const rows = [
+        ...dados.equip.map(e => ['Equipamento', e.imagem?'sim':'', e.nome, e.modelo, e.peca, '', e.estado, e.disp, e.preco, e.info]),
+        ...dados.pecas.map(p => ['Peça', p.imagem?'sim':'', p.nome, p.modelo, p.peca, p.apl, p.estado, '', p.preco, p.info]),
+      ];
+      const csv = [head, ...rows].map(r => r.map(esc).join(';')).join('\n');
+      const blob = new Blob(['\ufeff' + csv], { type: 'text/csv;charset=utf-8;' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob); a.download = 'catalogo-engtec.csv'; a.click();
+    });
+
+    render();
+  </script>
+</body>
+</html>
