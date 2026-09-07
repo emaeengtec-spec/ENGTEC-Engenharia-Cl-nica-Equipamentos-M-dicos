@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { IconBolt, IconShield, IconTruck, IconWhatsapp, IconPhone } from './Icons'
 import HeroParticles from './HeroParticles'
 
@@ -14,7 +15,7 @@ export default function Hero() {
             <div className="hero__logo-ring hero__logo-ring--3" />
             <img
               className="hero__logo-img"
-              src="/logo.jpg"
+              src={`${import.meta.env.BASE_URL}logo.jpg`}
               alt="EMAE ENGTEC logo"
               draggable="false"
             />
@@ -30,12 +31,12 @@ export default function Hero() {
           </p>
 
           <div className="hero__actions">
-            <a className="btn btn--primary btn--lg" href="#equipamentos">
+            <Link className="btn btn--primary btn--lg" to="/#equipamentos">
               Ver equipamentos
-            </a>
-            <a className="btn btn--ghost btn--lg" href="#servicos">
+            </Link>
+            <Link className="btn btn--ghost btn--lg" to="/#servicos">
               Falar com o técnico
-            </a>
+            </Link>
           </div>
 
           <div className="hero__contacts">

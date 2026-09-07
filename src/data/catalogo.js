@@ -88,10 +88,12 @@ export function parseNome(nomeArquivo) {
   return { categoria, modelo: resto || '—', especificacoes }
 }
 
+const imgUrl = (f) => `${import.meta.env.BASE_URL}catalogo-imagens/${encodeURI(f)}`
+
 export const itens = arquivos.map((f) => {
   const { categoria, modelo, especificacoes } = parseNome(f)
   return {
-    imagem: '/catalogo-imagens/' + f,
+    imagem: imgUrl(f),
     nome: f.replace(/\.jpeg$/i, '').replace(/_/g, ' '),
     categoria,
     modelo,
@@ -107,7 +109,7 @@ export function catalogoInicial() {
     const { categoria, modelo, especificacoes } = parseNome(f)
     return {
       id: 'eq-' + i,
-      imagem: '/catalogo-imagens/' + f,
+      imagem: imgUrl(f),
       nome: f.replace(/\.jpeg$/i, '').replace(/_/g, ' '),
       categoria,
       modelo,

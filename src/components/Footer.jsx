@@ -10,7 +10,7 @@ export default function Footer() {
           <Link to="/" className="brand">
             <div className="footer__logo-container">
               <div className="footer__logo-glow" />
-              <img className="footer__logo-full" src="/logo.jpg" alt="EMAE ENGTEC — Manutenção, Acessórios e Equipamentos LTDA" />
+              <img className="footer__logo-full" src={`${import.meta.env.BASE_URL}logo.jpg`} alt="EMAE ENGTEC — Manutenção, Acessórios e Equipamentos LTDA" />
             </div>
           </Link>
           <p className="footer__empresa">EMAE ENGTEC — Manutenção, Acessórios e Equipamentos LTDA</p>

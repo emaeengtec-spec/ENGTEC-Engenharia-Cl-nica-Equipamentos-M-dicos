@@ -118,12 +118,16 @@ export default function Catalogo() {
           <div className="catalogo__grid">
             {filtrados.map((it) => (
               <article key={it.id} className="cat-card">
-                <img
-                  className="cat-card__img"
-                  src={it.imagem}
-                  alt={it.nome}
-                  loading="lazy"
-                />
+                <div className="cat-card__img-wrap">
+                  <img
+                    className="cat-card__img"
+                    src={it.imagem}
+                    alt={it.nome}
+                    loading="lazy"
+                    onError={(e) => { e.currentTarget.style.display = 'none'; e.currentTarget.nextElementSibling.style.display = 'flex' }}
+                  />
+                  <div className="cat-card__img-fallback" style={{ display: 'none' }}>{it.categoria}</div>
+                </div>
                 <div className="cat-card__body">
                   <span className="cat-tag">{it.categoria}</span>
                   <h3 className="cat-card__nome">{it.nome}</h3>
